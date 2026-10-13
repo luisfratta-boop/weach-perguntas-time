@@ -1,0 +1,37 @@
+{
+  "rodada_atual": 1,
+  "max_por_funcao": 5,
+  "funcoes": ["Liderança", "Comercial", "Atendimento", "Planejamento de mídia", "Operação de mídia"],
+  "perguntas": [
+    { "id": "P01", "funcoes": ["Liderança"], "pergunta": "Qual movimento você acredita que o mercado não está vendo e vai fazer toda a diferença?", "formatos": ["carrossel", "Daniel na câmera"], "rodada": 1, "ativa": "sim" },
+    { "id": "P02", "funcoes": ["Liderança"], "pergunta": "O que mudou na mídia no último ano que pouca gente percebeu?", "formatos": ["Daniel na câmera", "estudo"], "rodada": 1, "ativa": "sim" },
+    { "id": "P03", "funcoes": ["Liderança"], "pergunta": "Qual crença do mercado de mídia você discorda?", "formatos": ["Daniel na câmera"], "rodada": 1, "ativa": "sim" },
+    { "id": "P04", "funcoes": ["Liderança"], "pergunta": "Qual erro você mais vê marcas e agências repetindo?", "formatos": ["carrossel", "tipos de pessoa"], "rodada": 1, "ativa": "sim" },
+    { "id": "P05", "funcoes": ["Liderança", "Planejamento de mídia"], "pergunta": "Qual dado sobre comportamento do consumidor mais te surpreendeu este ano?", "formatos": ["carrossel"], "rodada": 1, "ativa": "sim" },
+    { "id": "P06", "funcoes": ["Liderança", "Operação de mídia"], "pergunta": "Qual métrica as marcas olham e não deveriam, e qual deveriam olhar?", "formatos": ["carrossel", "estudo"], "rodada": 1, "ativa": "não" },
+
+    { "id": "P07", "funcoes": ["Comercial"], "pergunta": "Qual objeção é mais comum dentro de um fechamento?", "formatos": ["carrossel", "série da operação"], "rodada": 1, "ativa": "sim" },
+    { "id": "P08", "funcoes": ["Comercial"], "pergunta": "Que pergunta todo cliente faz na primeira reunião?", "formatos": ["material para usar", "Alberto & Bia"], "rodada": 1, "ativa": "sim" },
+    { "id": "P09", "funcoes": ["Comercial"], "pergunta": "Qual pedido de cliente mais te fez rir, ou suar?", "formatos": ["série da operação", "tipos de pessoa"], "rodada": 1, "ativa": "sim" },
+    { "id": "P10", "funcoes": ["Comercial"], "pergunta": "O que o cliente acha que a Weach faz e não faz, ou o contrário?", "formatos": ["carrossel"], "rodada": 1, "ativa": "sim" },
+    { "id": "P11", "funcoes": ["Comercial"], "pergunta": "Qual argumento mais convence na hora de fechar?", "formatos": ["estudo", "institucional"], "rodada": 1, "ativa": "sim" },
+
+    { "id": "P12", "funcoes": ["Atendimento"], "pergunta": "O que os clientes mais valorizam dentro do contrato?", "formatos": ["institucional", "carrossel"], "rodada": 1, "ativa": "sim" },
+    { "id": "P13", "funcoes": ["Atendimento"], "pergunta": "Qual dúvida ou reclamação mais se repete durante uma campanha?", "formatos": ["série da operação", "material para usar"], "rodada": 1, "ativa": "sim" },
+    { "id": "P14", "funcoes": ["Atendimento"], "pergunta": "Qual o momento mais tenso de uma campanha e como vocês resolvem?", "formatos": ["série da operação", "novelinha"], "rodada": 1, "ativa": "sim" },
+    { "id": "P15", "funcoes": ["Atendimento"], "pergunta": "Que atitude do cliente faz a campanha dar mais certo?", "formatos": ["carrossel"], "rodada": 1, "ativa": "sim" },
+
+    { "id": "P16", "funcoes": ["Planejamento de mídia"], "pergunta": "Qual o maior desafio na hora de montar um plano de mídia?", "formatos": ["série da operação", "Alberto & Bia"], "rodada": 1, "ativa": "sim" },
+    { "id": "P17", "funcoes": ["Planejamento de mídia", "Operação de mídia"], "pergunta": "Qual decisão de mídia parece certa e quase sempre dá errado?", "formatos": ["carrossel"], "rodada": 1, "ativa": "sim" },
+    { "id": "P18", "funcoes": ["Planejamento de mídia"], "pergunta": "Que formato ou canal está subestimado hoje?", "formatos": ["estudo", "carrossel"], "rodada": 1, "ativa": "sim" },
+    { "id": "P19", "funcoes": ["Planejamento de mídia"], "pergunta": "O que mudou no seu trabalho desde que o ChatGPT Ads chegou?", "formatos": ["estudo", "Daniel na câmera"], "rodada": 1, "ativa": "sim" },
+    { "id": "P20", "funcoes": ["Planejamento de mídia"], "pergunta": "Como você explicaria atribuição para alguém de fora do mercado?", "formatos": ["estudo", "Alberto & Bia"], "rodada": 1, "ativa": "sim" },
+
+    { "id": "P21", "funcoes": ["Operação de mídia"], "pergunta": "Qual a situação mais recorrente e engraçada (ou não) que acontece no seu ambiente de trabalho?", "formatos": ["tipos de pessoa", "série da operação"], "rodada": 1, "ativa": "sim" },
+    { "id": "P22", "funcoes": ["Operação de mídia"], "pergunta": "Conta uma campanha que virou no meio do caminho: o que aconteceu e o que vocês mudaram?", "formatos": ["série da operação"], "rodada": 1, "ativa": "sim" },
+
+    { "id": "P23", "funcoes": ["Todas as funções"], "pergunta": "Que tipo de pessoa existe em toda reunião de mídia?", "formatos": ["tipos de pessoa"], "rodada": 1, "ativa": "sim" },
+    { "id": "P24", "funcoes": ["Todas as funções"], "pergunta": "Qual frase você mais ouve no seu dia de trabalho?", "formatos": ["tipos de pessoa", "série da operação"], "rodada": 1, "ativa": "não" },
+    { "id": "P25", "funcoes": ["Todas as funções"], "pergunta": "O que você queria que mais gente soubesse sobre o seu trabalho?", "formatos": ["carrossel", "institucional"], "rodada": 1, "ativa": "não" }
+  ]
+}

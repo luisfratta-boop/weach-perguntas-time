@@ -1,0 +1,8 @@
+# Respostas reais do time e ideias geradas ficam só no computador
+respostas/*
+!respostas/exemplo-respostas.csv
+conteudos/*
+!conteudos/exemplo-ideias.md
+!conteudos/exemplo-ideias.csv
+fontes/
+.vercel

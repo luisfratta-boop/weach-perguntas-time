@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Perguntas Weach</title>
+<meta name="description" content="Cinco minutos, algumas perguntas e a sua experiência vira conteúdo da Weach.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#021B51">
+<meta property="og:title" content="Weach | 5 minutos com o time">
+<meta property="og:description" content="Algumas perguntas rápidas. Sua experiência vira conteúdo.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="assets/logo-w.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul-1: #021B51;
+    --azul-2: #02316D;
+    --azul-3: #0561BC;
+    --azul-4: #036DCF;
+    --card: #05265D;
+    --amarelo: #F8B804;
+    --branco: #FFFFFF;
+    --texto-suave: rgba(255, 255, 255, .72);
+    --linha: rgba(255, 255, 255, .16);
+    --raio: 22px;
+    --gutter: 20px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: var(--branco);
+    background: var(--azul-1);
+    min-height: 100vh;
+    min-height: 100dvh;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Fundo fixo em degradê (pseudo-elemento para funcionar bem no iOS) */
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -1;
+    background: linear-gradient(165deg, var(--azul-1) 0%, var(--azul-2) 34%, var(--azul-3) 74%, var(--azul-4) 100%);
+  }
+
+  .topo {
+    position: sticky; top: 0; z-index: 5;
+    padding: calc(env(safe-area-inset-top) + 18px) var(--gutter) 14px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background: linear-gradient(180deg, rgba(2, 27, 81, .92) 60%, rgba(2, 27, 81, 0));
+  }
+  .progresso { flex: 1; max-width: 420px; align-self: center; opacity: 0; transition: opacity .3s; }
+  .progresso.visivel { opacity: 1; }
+  .progresso-trilho { height: 6px; border-radius: 99px; background: rgba(255, 255, 255, .14); overflow: hidden; }
+  .progresso-barra { height: 100%; width: 0; border-radius: 99px; background: var(--amarelo); transition: width .4s ease; }
+  .logo { width: 46px; height: auto; display: block; flex-shrink: 0; margin-left: auto; }
+
+  main {
+    width: 100%; max-width: 640px; margin: 0 auto;
+    padding: 12px var(--gutter) calc(env(safe-area-inset-bottom) + 40px);
+  }
+  .tela { display: none; animation: entrar .35s ease both; }
+  .tela.ativa { display: block; }
+  @keyframes entrar { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  .barrinha { width: 56px; height: 6px; border-radius: 3px; background: var(--amarelo); margin: 28px 0 22px; }
+  h1, h2 { font-weight: 400; line-height: 1.18; letter-spacing: -.01em; }
+  h1 { font-size: clamp(32px, 9vw, 46px); }
+  h2 { font-size: clamp(26px, 7vw, 34px); }
+  h1 strong, h2 strong { font-weight: 700; display: block; }
+  .pergunta-titulo { font-size: clamp(22px, 6vw, 28px); font-weight: 600; line-height: 1.3; }
+
+  .circulo { position: relative; display: inline-block; white-space: nowrap; }
+  .circulo svg {
+    position: absolute; left: -7%; top: -20%; width: 114%; height: 146%;
+    overflow: visible; pointer-events: none;
+  }
+  .circulo path {
+    fill: none; stroke: var(--amarelo); stroke-width: 3.2; stroke-linecap: round;
+    stroke-dasharray: 600; stroke-dashoffset: 600;
+    animation: desenhar 1.1s .45s ease-out forwards;
+  }
+  @keyframes desenhar { to { stroke-dashoffset: 0; } }
+
+  .lead { font-size: 17px; color: var(--texto-suave); margin-top: 22px; max-width: 34em; }
+  .lead b { color: var(--branco); font-weight: 600; }
+
+  .card {
+    background: var(--card); border-radius: var(--raio);
+    padding: 22px 22px 24px; margin-top: 28px;
+  }
+  .card-rotulo { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--amarelo); margin-bottom: 8px; }
+  .card p { font-size: 16px; }
+
+  .campo { margin-top: 26px; }
+  .campo > label, .campo > .rotulo { display: block; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+  input[type="text"], textarea {
+    width: 100%; font: inherit; font-size: 17px; color: var(--branco);
+    background: var(--card); border: 1.5px solid transparent; border-radius: 16px;
+    padding: 15px 16px; outline: none; transition: border-color .2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  input[type="text"]::placeholder, textarea::placeholder { color: rgba(255, 255, 255, .42); }
+  input[type="text"]:focus, textarea:focus { border-color: var(--amarelo); }
+  textarea { min-height: 200px; resize: vertical; line-height: 1.55; }
+
+  .funcoes { display: grid; gap: 10px; }
+  .funcao { position: relative; }
+  .funcao input { position: absolute; opacity: 0; pointer-events: none; }
+  .funcao span {
+    display: block; padding: 15px 18px; border-radius: 16px; cursor: pointer;
+    background: var(--card); border: 1.5px solid transparent; font-weight: 500; font-size: 16px;
+    transition: border-color .2s, background .2s;
+  }
+  .funcao input:checked + span { border-color: var(--amarelo); background: #0A3274; font-weight: 600; }
+  .funcao input:focus-visible + span { outline: 2px solid var(--branco); outline-offset: 2px; }
+
+  .erro { color: #FFD45C; font-size: 14px; font-weight: 500; margin-top: 10px; min-height: 1px; }
+  .dica { font-size: 13px; color: var(--texto-suave); margin-top: 10px; }
+
+  .acoes { display: flex; align-items: center; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  .btn {
+    font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; border: 0;
+    border-radius: 99px; padding: 16px 28px; min-height: 52px;
+    transition: transform .15s, opacity .2s, background .2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn:disabled { opacity: .55; cursor: default; }
+  .btn-primario { background: var(--amarelo); color: var(--azul-1); }
+  .cheio { width: 100%; }
+  .btn-secundario { background: transparent; color: var(--branco); border: 1.5px solid var(--linha); }
+  .btn-texto { background: transparent; color: var(--texto-suave); padding: 16px 10px; font-weight: 600; }
+  .acoes-sec { display: flex; justify-content: space-between; margin-top: 6px; }
+  .acoes-sec .btn-texto { padding-left: 4px; padding-right: 4px; }
+  .btn:focus-visible { outline: 2px solid var(--branco); outline-offset: 3px; }
+
+  .pergunta-meta { font-size: 13px; font-weight: 600; color: var(--texto-suave); margin-top: 26px; letter-spacing: .02em; }
+  .pergunta-meta + .barrinha { margin-top: 12px; }
+  .contador { font-size: 12px; color: var(--texto-suave); text-align: right; margin-top: 6px; }
+
+  .resumo { margin-top: 26px; display: grid; gap: 10px; }
+  .resumo-item { background: var(--card); border-radius: 16px; padding: 14px 16px; font-size: 14px; }
+  .resumo-item b { display: block; font-weight: 600; margin-bottom: 4px; }
+  .resumo-item span { color: var(--texto-suave); }
+
+  .carregando { text-align: center; padding: 80px 0; color: var(--texto-suave); }
+
+  @media (min-width: 720px) {
+    :root { --gutter: 40px; }
+    main { padding-top: 40px; }
+    .funcoes { grid-template-columns: 1fr 1fr; }
+    .logo { width: 54px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tela { animation: none; }
+    .circulo path { animation: none; stroke-dashoffset: 0; }
+    .progresso-barra { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="progresso" id="progresso" aria-hidden="true">
+    <div class="progresso-trilho"><div class="progresso-barra" id="progressoBarra"></div></div>
+  </div>
+  <img class="logo" src="assets/logo-w.png" alt="Weach">
+</header>
+
+<main>
+  <div class="tela ativa carregando" id="telaCarregando">Carregando…</div>
+
+  <!-- 1. Abertura -->
+  <section class="tela" id="telaAbertura" aria-labelledby="tituloAbertura">
+    <div class="barrinha"></div>
+    <h1 id="tituloAbertura">Sua experiência
+      <strong>vira <span class="circulo">conteúdo<svg viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M152 10 C 108 1, 38 5, 14 27 C -6 47, 30 73, 102 75 C 166 77, 197 58, 191 36 C 185 15, 138 4, 88 9"/></svg></span>.</strong>
+    </h1>
+    <p class="lead">São <b>poucas perguntas abertas</b>, uma por tela, só da sua função. Leva <b>uns 5 minutos</b>. Escreva do seu jeito, como se estivesse contando para alguém do time no café.</p>
+    <div class="card">
+      <div class="card-rotulo">Antes de começar</div>
+      <p>Não cite nome de cliente nem números de campanha. Conte a situação, a gente cuida do resto.</p>
+    </div>
+    <div class="acoes"><button class="btn btn-primario cheio" id="btnComecar">Começar</button></div>
+  </section>
+
+  <!-- 2. Identificação -->
+  <section class="tela" id="telaIdentificacao" aria-labelledby="tituloIdent">
+    <div class="barrinha"></div>
+    <h2 id="tituloIdent">Primeiro,<strong>quem é você?</strong></h2>
+    <form id="formIdent" novalidate>
+      <div class="campo">
+        <label for="nome">Seu nome</label>
+        <input type="text" id="nome" name="nome" autocomplete="name" autocapitalize="words" placeholder="Como te chamam aqui" required>
+      </div>
+      <div class="campo" role="radiogroup" aria-labelledby="rotuloFuncao">
+        <span class="rotulo" id="rotuloFuncao">Sua função</span>
+        <div class="funcoes" id="listaFuncoes"></div>
+      </div>
+      <p class="erro" id="erroIdent" role="alert"></p>
+      <div class="acoes">
+        <button type="submit" class="btn btn-primario cheio">Ver minhas perguntas</button>
+      </div>
+      <div class="acoes-sec">
+        <button type="button" class="btn btn-texto" id="btnVoltarAbertura">Voltar</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- 3. Pergunta -->
+  <section class="tela" id="telaPergunta" aria-live="polite">
+    <p class="pergunta-meta" id="perguntaMeta"></p>
+    <div class="barrinha"></div>
+    <h2 class="pergunta-titulo" id="perguntaTexto"></h2>
+    <div class="campo">
+      <label for="resposta" class="sr-only" style="position:absolute;left:-9999px">Sua resposta</label>
+      <textarea id="resposta" placeholder="Escreva aqui. Pode ser curto, pode ser longo, pode ser uma história."></textarea>
+      <div class="contador" id="contador"></div>
+    </div>
+    <p class="erro" id="erroPergunta" role="alert"></p>
+    <div class="acoes">
+      <button class="btn btn-primario cheio" id="btnProxima">Próxima</button>
+    </div>
+    <div class="acoes-sec">
+      <button class="btn btn-texto" id="btnVoltar">Voltar</button>
+      <button class="btn btn-texto" id="btnPular">Pular</button>
+    </div>
+  </section>
+
+  <!-- 4. Agradecimento -->
+  <section class="tela" id="telaFim" aria-labelledby="tituloFim">
+    <div class="barrinha"></div>
+    <h2 id="tituloFim"><span id="fimNome">Valeu</span><strong>Tá entregue.</strong></h2>
+    <p class="lead">Suas respostas viram matéria-prima para os conteúdos da Weach no Instagram e no LinkedIn. Se alguma ideia for usar a sua fala, a gente fala com você antes.</p>
+    <div class="card">
+      <div class="card-rotulo">E agora?</div>
+      <p>Pode fechar esta página. Na próxima rodada chegam perguntas novas.</p>
+    </div>
+  </section>
+
+  <!-- 5. Falha no envio -->
+  <section class="tela" id="telaFalha" aria-labelledby="tituloFalha">
+    <div class="barrinha"></div>
+    <h2 id="tituloFalha">Opa, não foi<strong>mas nada se perdeu.</strong></h2>
+    <p class="lead">O envio não funcionou agora. Copie suas respostas e mande por WhatsApp ou e-mail para quem te passou o link.</p>
+    <div class="acoes">
+      <button class="btn btn-primario cheio" id="btnCopiar">Copiar respostas</button>
+    </div>
+    <p class="dica" id="copiarStatus" role="status"></p>
+    <div class="acoes">
+      <button class="btn btn-secundario cheio" id="btnTentarDeNovo">Tentar enviar de novo</button>
+    </div>
+    <div class="resumo" id="resumo"></div>
+  </section>
+</main>
+
+<script>
+/* ===== CONFIGURAÇÃO =====
+   Cole aqui a URL do aplicativo da web do Google Apps Script (termina em /exec). */
+const SCRIPT_URL = "";
+/* ======================== */
+
+const $ = (id) => document.getElementById(id);
+const estado = { banco: null, nome: "", funcao: "", perguntas: [], respostas: {}, indice: 0 };
+let chaveRascunho = "weach-perguntas";
+
+function guardar() {
+  try {
+    localStorage.setItem(chaveRascunho, JSON.stringify({
+      nome: estado.nome, funcao: estado.funcao, respostas: estado.respostas, indice: estado.indice
+    }));
+  } catch (e) {}
+}
+function recuperar() {
+  try { return JSON.parse(localStorage.getItem(chaveRascunho)) || null; } catch (e) { return null; }
+}
+function limparRascunho() { try { localStorage.removeItem(chaveRascunho); } catch (e) {} }
+
+function mostrar(id) {
+  document.querySelectorAll(".tela").forEach((t) => t.classList.toggle("ativa", t.id === id));
+  $("progresso").classList.toggle("visivel", id === "telaPergunta");
+  window.scrollTo(0, 0);
+}
+
+function ativa(p) { return String(p.ativa).trim().toLowerCase() === "sim"; }
+
+/* Perguntas da função: as próprias da função primeiro, depois as compartilhadas,
+   até o limite da rodada; no fim, a pergunta ativa de "Todas as funções". */
+function montarPerguntas(funcao) {
+  const max = estado.banco.max_por_funcao || 5;
+  const lista = estado.banco.perguntas;
+  const daFuncao = lista.filter((p) => ativa(p) && p.funcoes.includes(funcao));
+  daFuncao.sort((a, b) => {
+    const pa = a.funcoes[0] === funcao ? 0 : 1, pb = b.funcoes[0] === funcao ? 0 : 1;
+    return pa - pb || a.id.localeCompare(b.id);
+  });
+  const escolhidas = daFuncao.slice(0, max).sort((a, b) => a.id.localeCompare(b.id));
+  const todas = lista.find((p) => ativa(p) && p.funcoes.includes("Todas as funções"));
+  if (todas) escolhidas.push(todas);
+  return escolhidas;
+}
+
+function renderFuncoes() {
+  $("listaFuncoes").innerHTML = estado.banco.funcoes.map((f, i) =>
+    `<label class="funcao"><input type="radio" name="funcao" value="${f}" id="f${i}"><span>${f}</span></label>`
+  ).join("");
+}
+
+function renderPergunta() {
+  const total = estado.perguntas.length;
+  const p = estado.perguntas[estado.indice];
+  $("perguntaMeta").textContent = `Pergunta ${estado.indice + 1} de ${total}`;
+  $("perguntaTexto").textContent = p.pergunta;
+  $("resposta").value = estado.respostas[p.id] || "";
+  $("erroPergunta").textContent = "";
+  atualizarContador();
+  $("progressoBarra").style.width = `${(estado.indice / total) * 100}%`;
+  const ultima = estado.indice === total - 1;
+  $("btnProxima").textContent = ultima ? "Enviar respostas" : "Próxima";
+  $("btnPular").textContent = ultima ? "Pular e enviar" : "Pular";
+}
+
+function atualizarContador() {
+  const n = $("resposta").value.trim().length;
+  $("contador").textContent = n ? `${n} caracteres` : "";
+}
+
+function salvarAtual() {
+  const p = estado.perguntas[estado.indice];
+  const texto = $("resposta").value.trim();
+  if (texto) estado.respostas[p.id] = texto; else delete estado.respostas[p.id];
+  guardar();
+}
+
+function avancar() {
+  if (estado.indice < estado.perguntas.length - 1) {
+    estado.indice++;
+    guardar();
+    renderPergunta();
+    window.scrollTo(0, 0);
+  } else {
+    enviar();
+  }
+}
+
+function montarEnvio() {
+  return {
+    rodada: estado.banco.rodada_atual,
+    nome: estado.nome,
+    funcao: estado.funcao,
+    respostas: estado.perguntas
+      .filter((p) => estado.respostas[p.id])
+      .map((p) => ({ id: p.id, pergunta: p.pergunta, formatos: p.formatos.join(", "), resposta: estado.respostas[p.id] }))
+  };
+}
+
+async function enviar() {
+  const dados = montarEnvio();
+  if (!dados.respostas.length) {
+    $("erroPergunta").textContent = "Você pulou todas. Responda pelo menos uma para enviar.";
+    return;
+  }
+  const botao = $("btnProxima");
+  botao.disabled = true; $("btnPular").disabled = true;
+  botao.textContent = "Enviando…";
+  $("progressoBarra").style.width = "100%";
+  try {
+    if (!SCRIPT_URL) throw new Error("SCRIPT_URL não configurada");
+    const controle = new AbortController();
+    const prazo = setTimeout(() => controle.abort(), 25000);
+    // text/plain evita a checagem prévia de CORS do navegador
+    const r = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(dados),
+      signal: controle.signal
+    });
+    clearTimeout(prazo);
+    const json = await r.json();
+    if (!json.ok) throw new Error(json.erro || "Falha no script");
+    limparRascunho();
+    $("fimNome").textContent = `Valeu, ${estado.nome.split(" ")[0]}.`;
+    mostrar("telaFim");
+  } catch (e) {
+    console.warn("[Weach] envio falhou:", e);
+    renderResumo(dados);
+    mostrar("telaFalha");
+  } finally {
+    botao.disabled = false; $("btnPular").disabled = false;
+  }
+}
+
+function textoParaCopiar(dados) {
+  const linhas = [`Respostas Weach | Rodada ${dados.rodada}`, `Nome: ${dados.nome}`, `Função: ${dados.funcao}`, ""];
+  dados.respostas.forEach((r) => { linhas.push(`${r.id}. ${r.pergunta}`, r.resposta, ""); });
+  return linhas.join("\n").trim();
+}
+
+function renderResumo(dados) {
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  $("resumo").innerHTML = dados.respostas.map((r) =>
+    `<div class="resumo-item"><b>${esc(r.pergunta)}</b><span>${esc(r.resposta)}</span></div>`
+  ).join("");
+  $("copiarStatus").textContent = "";
+}
+
+async function copiar() {
+  const texto = textoParaCopiar(montarEnvio());
+  let ok = false;
+  try { await navigator.clipboard.writeText(texto); ok = true; } catch (e) {
+    const area = document.createElement("textarea");
+    area.value = texto; area.setAttribute("readonly", ""); area.style.position = "fixed"; area.style.opacity = "0";
+    document.body.appendChild(area); area.select(); area.setSelectionRange(0, texto.length);
+    try { ok = document.execCommand("copy"); } catch (e2) {}
+    area.remove();
+  }
+  $("copiarStatus").textContent = ok
+    ? "Copiado. Agora é só colar no WhatsApp ou no e-mail."
+    : "Não deu para copiar automaticamente. Selecione o texto abaixo e copie.";
+}
+
+/* ===== Eventos ===== */
+$("btnComecar").addEventListener("click", () => { mostrar("telaIdentificacao"); setTimeout(() => $("nome").focus(), 50); });
+$("btnVoltarAbertura").addEventListener("click", () => mostrar("telaAbertura"));
+
+$("formIdent").addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  const nome = $("nome").value.trim();
+  const marcada = document.querySelector('input[name="funcao"]:checked');
+  if (!nome && !marcada) return ($("erroIdent").textContent = "Falta seu nome e sua função.");
+  if (!nome) return ($("erroIdent").textContent = "Falta seu nome.");
+  if (!marcada) return ($("erroIdent").textContent = "Escolha sua função.");
+  $("erroIdent").textContent = "";
+  if (estado.funcao && estado.funcao !== marcada.value) estado.indice = 0;
+  estado.nome = nome;
+  estado.funcao = marcada.value;
+  estado.perguntas = montarPerguntas(estado.funcao);
+  if (estado.indice >= estado.perguntas.length) estado.indice = 0;
+  guardar();
+  renderPergunta();
+  mostrar("telaPergunta");
+});
+
+$("btnVoltar").addEventListener("click", () => {
+  salvarAtual();
+  if (estado.indice === 0) return mostrar("telaIdentificacao");
+  estado.indice--;
+  guardar();
+  renderPergunta();
+});
+$("btnPular").addEventListener("click", () => {
+  const p = estado.perguntas[estado.indice];
+  delete estado.respostas[p.id];
+  guardar();
+  avancar();
+});
+$("btnProxima").addEventListener("click", () => {
+  if (!$("resposta").value.trim()) {
+    $("erroPergunta").textContent = "Escreva algo ou toque em Pular.";
+    $("resposta").focus();
+    return;
+  }
+  salvarAtual();
+  avancar();
+});
+$("resposta").addEventListener("input", () => { atualizarContador(); $("erroPergunta").textContent = ""; salvarAtual(); });
+$("resposta").addEventListener("keydown", (ev) => {
+  if (ev.key === "Enter" && (ev.ctrlKey || ev.metaKey)) $("btnProxima").click();
+});
+$("btnCopiar").addEventListener("click", copiar);
+$("btnTentarDeNovo").addEventListener("click", () => { mostrar("telaPergunta"); enviar(); });
+
+/* ===== Início ===== */
+(async function iniciar() {
+  try {
+    const r = await fetch("data/perguntas.json", { cache: "no-store" });
+    estado.banco = await r.json();
+  } catch (e) {
+    $("telaCarregando").textContent = "Não conseguimos carregar as perguntas. Atualize a página em instantes.";
+    return;
+  }
+  chaveRascunho = `weach-perguntas-r${estado.banco.rodada_atual}`;
+  renderFuncoes();
+  const rascunho = recuperar();
+  if (rascunho) {
+    estado.respostas = rascunho.respostas || {};
+    estado.indice = rascunho.indice || 0;
+    if (rascunho.nome) $("nome").value = rascunho.nome;
+    if (rascunho.funcao) {
+      estado.funcao = rascunho.funcao;
+      const r = document.querySelector(`input[name="funcao"][value="${rascunho.funcao}"]`);
+      if (r) r.checked = true;
+    }
+  }
+  mostrar("telaAbertura");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>html,body{margin:0;background:#000}iframe{border:0;width:390px;height:844px;display:block}</style>
+<iframe id="f" src="../index.html"></iframe>
+<script>
+const passo = Number(new URLSearchParams(location.search).get("passo") || 0);
+const f = document.getElementById("f");
+f.onload = () => setTimeout(() => {
+  const w = f.contentWindow, d = f.contentDocument;
+  try { w.localStorage.clear(); } catch (e) {}
+  const clicar = (id) => d.getElementById(id).click();
+  if (passo >= 1) clicar("btnComecar");
+  if (passo === 2 || passo >= 3) {
+    d.getElementById("nome").value = "Marina Teste";
+    d.querySelector('input[value="Planejamento de mídia"]').checked = true;
+    d.querySelector("#formIdent button[type=submit]").click();
+  }
+  if (passo >= 3) {
+    d.getElementById("resposta").value = "Antes o briefing começava pela palavra-chave. Agora começa pela pergunta que o consumidor faria.";
+    d.getElementById("resposta").dispatchEvent(new Event("input"));
+    clicar("btnProxima");
+  }
+  if (passo >= 4) { for (let i = 0; i < 5; i++) clicar("btnPular"); }
+  if (passo === 5) { w.eval('$("fimNome").textContent = "Valeu, Marina."; mostrar("telaFim")'); }
+  document.title = "pronto " + w.eval("JSON.stringify(estado.perguntas.map(p=>p.id))");
+}, 600);
+</script>
